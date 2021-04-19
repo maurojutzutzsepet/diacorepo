@@ -10,7 +10,7 @@ export const databaseProvider = [
     inject: [ConfigService],
     async useFactory(config: ConfigService) {
       return {
-        ssl: true,
+        ssl: false,
         type: 'mssql' as 'mssql',
         host: config.get(Configuration.HOST),
         username: config.get(Configuration.USERNAME),

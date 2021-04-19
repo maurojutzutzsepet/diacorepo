@@ -8,43 +8,45 @@ import {
   Patch,
   Post,
 } from '@nestjs/common';
+import { ApiBody, ApiTags } from '@nestjs/swagger';
 import { getConnection } from 'typeorm';
+import { CreateRoleDto } from './dtos/create-role.dto';
+import { ReadRoleDto } from './dtos/read-role.dto';
+import { UpdateRoleDto } from './dtos/update-role.dto';
 import { Role } from './role.entity';
 import { RoleService } from './role.service';
 
+@ApiTags('Modulo Roles')
 @Controller('roles')
 export class RoleController {
   constructor(private readonly _roleService: RoleService) {}
 
-  @Get(':id')
-  async getRole(@Param('id', ParseIntPipe) id: number): Promise<Role> {
-    const role = await this._roleService.get(id);
-    return role;
+  @Get(':roleId')
+  getRole(@Param('roleId', ParseIntPipe) roleId: number): Promise<ReadRoleDto> {
+    return this._roleService.get(roleId);
   }
 
   @Get()
-  async getRoles(): Promise<Role[]> {
-    const role = await this._roleService.getAll();
-    return role;
+  getRoles(): Promise<ReadRoleDto[]> {
+    return this._roleService.getAll();
   }
 
   @Post()
-  async createRole(@Body() role: Role): Promise<Role> {
-    const createdRole = await this._roleService.create(role);
-    return createdRole;
+  @ApiBody({ type: CreateRoleDto })
+  createRole(@Body() role: Partial<CreateRoleDto>): Promise<ReadRoleDto> {
+    return this._roleService.create(role);
   }
 
-  @Patch(':id')
-  async updateRole(
-    @Param('id', ParseIntPipe) id: number,
-    @Body() role: Role,
-  ): Promise<Role> {
-    const updateRole = await this._roleService.update(id, role);
-    return updateRole;
+  @Patch(':roleId')
+  updateRole(
+    @Param('roleId', ParseIntPipe) roleId: number,
+    @Body() role: Partial<UpdateRoleDto>,
+  ): Promise<ReadRoleDto> {
+    return this._roleService.update(roleId, role);
   }
 
-  @Delete(':id')
-  async deleteRole(@Param('id', ParseIntPipe) id: number) {
-    await this._roleService.delete(id);
+  @Delete(':roleId')
+  async deleteRole(@Param('roleId', ParseIntPipe) roleId: number) {
+    await this._roleService.delete(roleId);
   }
 }
