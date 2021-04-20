@@ -21,7 +21,8 @@
     "test:e2e": "jest --config ./test/jest-e2e.json",
     "migration:generate": "ts-node ./node_modules/typeorm/cli.js migration:generate --config ./orm.config.json --name",
     "migration:run": "ts-node ./node_modules/typeorm/cli.js migration:run --config ./orm.config.json",
-    "migration:revert": "ts-node ./node_modules/typeorm/cli.js migration:revert --config ./orm.config.json"
+    "migration:revert": "ts-node ./node_modules/typeorm/cli.js migration:revert --config ./orm.config.json",
+    "heroku-postbuild": "npm install --only=dev --no-shrinkwrap && npm run build"
   },
   "dependencies": {
     "@nestjs/common": "^7.6.15",
