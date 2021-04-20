@@ -8,7 +8,7 @@ import {
   Patch,
   Post,
 } from '@nestjs/common';
-import { ApiBody, ApiTags } from '@nestjs/swagger';
+import { ApiTags } from '@nestjs/swagger';
 import { getConnection } from 'typeorm';
 import { CreateRoleDto } from './dtos/create-role.dto';
 import { ReadRoleDto } from './dtos/read-role.dto';
@@ -32,7 +32,6 @@ export class RoleController {
   }
 
   @Post()
-  @ApiBody({ type: CreateRoleDto })
   createRole(@Body() role: Partial<CreateRoleDto>): Promise<ReadRoleDto> {
     return this._roleService.create(role);
   }
