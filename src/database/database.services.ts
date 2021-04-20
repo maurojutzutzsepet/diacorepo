@@ -1,15 +1,18 @@
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { Configuration } from 'src/config/config.keys';
 import { ConfigModule } from 'src/config/config.module';
+import { ConfigService } from 'src/config/config.service';
 import { ConnectionOptions } from 'typeorm';
 
 export const databaseProvider = [
   TypeOrmModule.forRootAsync({
     imports: [ConfigModule],
-    async useFactory() {
+    inject: [ConfigService],
+    async useFactory(config: ConfigService) {
       return {
         ssl: false,
         type: 'mssql' as 'mssql',
-        host: 'grand-magpie-311219:us-central1:diacodb-mjs',
+        host: '104.154.189.53',
         username: 'mjsusuario1',
         port: 1433,
         password: 'agudevdiaco1234',
@@ -20,12 +23,3 @@ export const databaseProvider = [
     },
   }),
 ];
-
-// type: 'mssql' as 'mssql',
-//         host: config.get(Configuration.HOST),
-//         username: config.get(Configuration.USERNAME),
-//         port: 1433,
-//         password: config.get(Configuration.PASSWORD),
-//         database: config.get(Configuration.DATABASE),
-//         entities: [__dirname + '/../**/*.entity{.ts,.js}'],
-//         migrations: [__dirname + '/migrations/*{.ts,.js}'],

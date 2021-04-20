@@ -13,13 +13,13 @@ import { AppService } from './app.service';
 
 @Module({
   imports: [
-    //ConfigModule,
+    ConfigModule,
     DatabaseModule,
-    // UserModule,
-    // RoleModule,
-    // AuthModule,
-    // ComercioModule,
-    // QuejasModule,
+    UserModule,
+    RoleModule,
+    AuthModule,
+    ComercioModule,
+    QuejasModule,
   ],
   controllers: [AppController],
   providers: [AppService],
