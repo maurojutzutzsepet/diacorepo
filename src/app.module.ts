@@ -1,5 +1,5 @@
 import { Module } from '@nestjs/common';
-import { Configuration } from './config/config.keys';
+//import { Configuration } from './config/config.keys';
 import { ConfigModule } from './config/config.module';
 import { ConfigService } from './config/config.service';
 import { DatabaseModule } from './database/database.module';
@@ -14,7 +14,7 @@ import { AppService } from './app.service';
 @Module({
   imports: [
     //ConfigModule,
-    // DatabaseModule,
+    DatabaseModule,
     // UserModule,
     // RoleModule,
     // AuthModule,
