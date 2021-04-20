@@ -15,7 +15,7 @@ import { AppService } from './app.service';
   imports: [
     //ConfigModule,
     DatabaseModule,
-    // UserModule,
+    UserModule,
     // RoleModule,
     // AuthModule,
     // ComercioModule,
