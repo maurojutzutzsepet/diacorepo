@@ -8,16 +8,20 @@ import { RoleModule } from './modules/role/role.module';
 import { AuthModule } from './modules/auth/auth.module';
 import { ComercioModule } from './modules/comercio/comercio.module';
 import { QuejasModule } from './modules/quejas/quejas.module';
+import { AppController } from './app.controller';
+import { AppService } from './app.service';
 
 @Module({
   imports: [
-    ConfigModule,
-    DatabaseModule,
-    UserModule,
-    RoleModule,
-    AuthModule,
-    ComercioModule,
-    QuejasModule,
+    // ConfigModule,
+    // DatabaseModule,
+    // UserModule,
+    // RoleModule,
+    // AuthModule,
+    // ComercioModule,
+    // QuejasModule,
   ],
+  controllers: [AppController],
+  providers: [AppService],
 })
 export class AppModule {}
