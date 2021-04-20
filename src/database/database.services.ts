@@ -9,7 +9,7 @@ export const databaseProvider = [
       return {
         ssl: false,
         type: 'mssql' as 'mssql',
-        host: '104.154.189.53',
+        host: 'grand-magpie-311219:us-central1:diacodb-mjs',
         username: 'mjsusuario1',
         port: 1433,
         password: 'agudevdiaco1234',
