@@ -13,8 +13,8 @@ import { AppService } from './app.service';
 
 @Module({
   imports: [
-    // ConfigModule,
-    // DatabaseModule,
+    //ConfigModule,
+    DatabaseModule,
     // UserModule,
     // RoleModule,
     // AuthModule,
