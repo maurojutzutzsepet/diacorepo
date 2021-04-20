@@ -11,7 +11,7 @@ yarn-error.log*
 lerna-debug.log*
 
 #ormconfig
-ormconfig.json
+.orm.config.json
 
 #env
 .env

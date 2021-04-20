@@ -1,10 +1,10 @@
 {
   "type": "mssql",
-  "username": "usuario1",
-  "password": "12345",
-  "host": "localhost",
+  "username": "mjsusuario1",
+  "password": "agudevdiaco1234",
+  "host": "104.154.189.53",
   "port": 1433,
-  "database": "DIACODB",
+  "database": "testdb",
   "entities": ["src/**/**/*.entity{.ts,.js}"],
   "migrations": ["src/database/migrations/*{.ts,.js}"],
   "cli": {
