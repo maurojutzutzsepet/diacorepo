@@ -23,6 +23,6 @@ import { QuejasModule } from './modules/quejas/quejas.module';
 export class AppModule {
   static port: number | string;
   constructor(private readonly _configService: ConfigService) {
-    AppModule.port = process.env.PORT || 8000;
+    AppModule.port = this._configService.get(Configuration.PORT);
   }
 }
