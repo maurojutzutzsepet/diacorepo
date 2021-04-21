@@ -41,6 +41,13 @@ export class ComercioService {
     return comercio;
   }
 
+  async getComercioByNit(nit: string) {
+    const comercio = await this._comercioRepository.findOne({
+      where: { status: 'ACTIVE', nit: nit },
+    });
+    return comercio;
+  }
+
   async createComercio(
     comercio: Partial<CreateComercioDto>,
   ): Promise<ReadComercioDto> {

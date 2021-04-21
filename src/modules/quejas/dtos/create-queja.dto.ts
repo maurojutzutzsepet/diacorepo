@@ -10,6 +10,10 @@ export class CrateQuejaDto {
   readonly descripcion: string;
 
   @IsNumber()
-  @ApiProperty({ type: Number, description: 'comercioId' })
-  readonly comercioId: number;
+  @ApiProperty({ type: String, description: 'nit' })
+  readonly nit: string;
+
+  @IsNumber()
+  @ApiProperty({ type: String, description: 'user' })
+  readonly user: string;
 }

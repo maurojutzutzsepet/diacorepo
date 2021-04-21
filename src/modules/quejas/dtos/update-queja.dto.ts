@@ -10,6 +10,6 @@ export class UpdateQuejaDto {
   readonly descripcion: string;
 
   @IsNumber()
-  @ApiProperty({ type: Number, description: 'comercioId' })
-  readonly comercioId: number;
+  @ApiProperty({ type: String, description: 'nit' })
+  readonly nit: string;
 }

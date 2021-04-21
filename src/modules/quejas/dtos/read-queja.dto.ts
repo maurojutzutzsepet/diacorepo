@@ -14,6 +14,11 @@ export class ReadQuejaDto {
   readonly descripcion: string;
 
   @Expose()
+  @IsString()
+  @MaxLength(200, { message: 'cui no valida' })
+  readonly user: string;
+
+  @Expose()
   @Type((type) => ReadComercioDto)
   readonly comercio: ReadComercioDto;
 }

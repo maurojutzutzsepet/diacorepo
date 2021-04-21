@@ -15,6 +15,9 @@ export class Comercio extends BaseEntity {
   @Column({ type: 'varchar', unique: true, length: 60, nullable: false })
   nombre_comercio: string;
 
+  @Column({ type: 'varchar', unique: true, length: 60, nullable: false })
+  nit: string;
+
   @Column({ type: 'varchar', length: 20 })
   telefono: string;
 

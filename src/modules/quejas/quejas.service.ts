@@ -24,6 +24,14 @@ export class QuejaService {
     return quejas.map((queja: Queja) => plainToClass(ReadQuejaDto, queja));
   }
 
+  async getAllQuejasByCui(cui: string): Promise<ReadQuejaDto[]> {
+    const quejas = await this._quejaRepository.find({
+      where: { status: 'ACTIVE', user: cui },
+    });
+
+    return quejas.map((queja: Queja) => plainToClass(ReadQuejaDto, queja));
+  }
+
   async getQuehaById(idQueja: number): Promise<ReadQuejaDto> {
     const queja = await this._quejaRepository.findOne(idQueja, {
       where: { status: 'ACTIVE' },
@@ -32,13 +40,13 @@ export class QuejaService {
   }
 
   async createQueja(queja: Partial<CrateQuejaDto>) {
-    const { comercioId, descripcion } = queja;
+    const { nit, descripcion, user } = queja;
 
-    if (!comercioId) {
-      throw new BadRequestException('no se envio id comercio');
+    if (!nit) {
+      throw new BadRequestException('no se envio nit del comercio');
     }
-    const foundComercio = await this._comercioRepository.findOne(comercioId, {
-      where: { status: 'ACTIVE' },
+    const foundComercio = await this._comercioRepository.findOne({
+      where: { status: 'ACTIVE', nit: nit },
     });
 
     if (!foundComercio) {
@@ -46,20 +54,22 @@ export class QuejaService {
     }
     const saveQueja = new Queja();
     saveQueja.descripcion = descripcion;
+    saveQueja.user = user;
     saveQueja.comercio = foundComercio;
+
     const quejaCreated = await this._quejaRepository.save(saveQueja);
 
     return plainToClass(ReadQuejaDto, quejaCreated);
   }
 
   async updateQueja(queja: Partial<UpdateQuejaDto>, idQueja: number) {
-    const { comercioId, descripcion } = queja;
+    const { nit, descripcion } = queja;
 
-    if (!comercioId) {
+    if (!nit) {
       throw new BadRequestException('no se envio id comercio');
     }
-    const foundComercio = await this._comercioRepository.findOne(comercioId, {
-      where: { status: 'ACTIVE' },
+    const foundComercio = await this._comercioRepository.findOne({
+      where: { status: 'ACTIVE', nit: nit },
     });
 
     if (!foundComercio) {

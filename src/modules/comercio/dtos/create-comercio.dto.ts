@@ -7,6 +7,10 @@ export class CreateComercioDto {
   @MaxLength(50, { message: 'el nombre no es valido' })
   readonly nombre_comercio: string;
 
+  @ApiProperty({ type: String, description: 'nit' })
+  @MaxLength(50, { message: 'el nit no es valido' })
+  readonly nit: string;
+
   @IsString()
   @ApiProperty({ type: String, description: 'telefono' })
   @MaxLength(20, { message: 'el telefono no es valida' })

@@ -28,6 +28,11 @@ export class QuejasControlle {
     return this._quejasService.getAllQuejas();
   }
 
+  @Get('/user/:cui')
+  getAllQuejasByCui(@Param('cui') cui: string): Promise<ReadQuejaDto[]> {
+    return this._quejasService.getAllQuejasByCui(cui);
+  }
+
   @Get(':idQueja')
   getQuejaById(
     @Param('idQueja', ParseIntPipe) idQueja: number,

@@ -32,6 +32,11 @@ export class ComercioController {
     return this._comercioService.getComercioById(idComercio);
   }
 
+  @Get('/nit/:nit')
+  getComercioByNit(@Param('nit') nit: string): Promise<ReadComercioDto> {
+    return this._comercioService.getComercioByNit(nit);
+  }
+
   @Post()
   @ApiCreatedResponse({ description: 'Registro de comercios' })
   @ApiBody({ type: CreateComercioDto })

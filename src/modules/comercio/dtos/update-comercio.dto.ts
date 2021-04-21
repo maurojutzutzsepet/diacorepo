@@ -7,6 +7,9 @@ export class UpdateComercioDto {
   @ApiProperty({ type: String, description: 'nombre_comercio' })
   readonly nombre_comercio: string;
 
+  @ApiProperty({ type: String, description: 'nit' })
+  readonly nit: string;
+
   @IsString()
   @MaxLength(20, { message: 'el telefono no es valida' })
   @ApiProperty({ type: String, description: 'telefono' })

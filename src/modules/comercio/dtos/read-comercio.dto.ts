@@ -16,6 +16,11 @@ export class ReadComercioDto {
 
   @Expose()
   @IsString()
+  @MaxLength(50, { message: 'el nit no es valido' })
+  readonly nit: string;
+
+  @Expose()
+  @IsString()
   @MaxLength(100, { message: 'la descripcion no es valido' })
   readonly direccion: string;
 

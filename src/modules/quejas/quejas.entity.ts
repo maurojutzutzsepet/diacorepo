@@ -16,6 +16,9 @@ export class Queja extends BaseEntity {
   @Column({ type: 'varchar', length: 250 })
   descripcion: string;
 
+  @Column({ type: 'varchar', length: 60, nullable: false })
+  user: string;
+
   @Column({ type: 'datetime', default: () => 'CURRENT_TIMESTAMP' })
   createAt: Date;
 
