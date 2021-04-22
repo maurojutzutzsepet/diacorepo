@@ -5,12 +5,12 @@ import {
   Get,
   Param,
   ParseIntPipe,
-  Patch,
   Post,
+  Put,
   UseGuards,
 } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiBody, ApiTags } from '@nestjs/swagger';
 import { getConnection } from 'typeorm';
 import { Roles } from '../role/decorators/role.decorator';
 import { RoleGuard } from '../role/guards/role.guard';
@@ -54,7 +54,8 @@ export class UserController {
   //   return createdUser;
   // }
 
-  @Patch(':userId')
+  @Put(':userId')
+  @ApiBody({ type: UpdateUserDto })
   updateUser(
     @Param('userId', ParseIntPipe) userId: number,
     @Body() user: UpdateUserDto,

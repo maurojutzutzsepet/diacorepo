@@ -7,8 +7,9 @@ import {
   ParseIntPipe,
   Patch,
   Post,
+  Put,
 } from '@nestjs/common';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiBody, ApiTags } from '@nestjs/swagger';
 import { getConnection } from 'typeorm';
 import { CreateRoleDto } from './dtos/create-role.dto';
 import { ReadRoleDto } from './dtos/read-role.dto';
@@ -32,11 +33,13 @@ export class RoleController {
   }
 
   @Post()
+  @ApiBody({ type: CreateRoleDto })
   createRole(@Body() role: Partial<CreateRoleDto>): Promise<ReadRoleDto> {
     return this._roleService.create(role);
   }
 
-  @Patch(':roleId')
+  @Put(':roleId')
+  @ApiBody({ type: UpdateRoleDto })
   updateRole(
     @Param('roleId', ParseIntPipe) roleId: number,
     @Body() role: Partial<UpdateRoleDto>,

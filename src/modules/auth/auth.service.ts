@@ -34,7 +34,9 @@ export class AuthService {
     return this._authRepository.signup(signupDto);
   }
 
-  async signin(signinDto: SigninDTO): Promise<{ token: string; cui: string }> {
+  async signin(
+    signinDto: SigninDTO,
+  ): Promise<{ token: string; cui: string; roles: any }> {
     const { cui, password } = signinDto;
     const user: User = await this._authRepository.findOne({
       where: { cui },
@@ -59,6 +61,6 @@ export class AuthService {
 
     const token = await this._jwtService.sign(payload);
 
-    return { token, cui };
+    return { token, cui, roles: user.roles.map((r) => r.nombre as RoleType) };
   }
 }
