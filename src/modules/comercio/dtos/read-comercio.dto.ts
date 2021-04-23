@@ -50,6 +50,6 @@ export class ReadComercioDto {
   readonly email: string;
 
   @Expose()
-  @Type((type) => ReadQuejaSimpleDto)
-  readonly quejas: ReadQuejaSimpleDto[];
+  @Type((type) => ReadQuejaDto)
+  readonly quejas: ReadQuejaDto[];
 }
