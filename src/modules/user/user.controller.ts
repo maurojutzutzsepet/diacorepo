@@ -7,18 +7,12 @@ import {
   ParseIntPipe,
   Post,
   Put,
-  UseGuards,
+  //UseGuards,
 } from '@nestjs/common';
-import { AuthGuard } from '@nestjs/passport';
+
 import { ApiBody, ApiTags } from '@nestjs/swagger';
-import { getConnection } from 'typeorm';
-import { Roles } from '../role/decorators/role.decorator';
-import { RoleGuard } from '../role/guards/role.guard';
-import { Role } from '../role/role.entity';
 import { ReadUserDto, UpdateUserDto } from './dto';
-import { UserDTO } from './dto/user.dto';
-import { UserDetails } from './user.details.entity';
-import { User } from './user.entity';
+
 import { UserService } from './user.service';
 
 @ApiTags('Modulo usuarios')
@@ -27,6 +21,7 @@ export class UserController {
   constructor(private readonly _userService: UserService) {}
 
   @Get(':userId')
+  //comentamos por pruebas de autenticacion
   // @Roles('ADMIN', 'AGENTE')
   // @UseGuards(AuthGuard(), RoleGuard)
   async getUser(
@@ -34,25 +29,12 @@ export class UserController {
   ): Promise<ReadUserDto> {
     return this._userService.get(userId);
   }
-
+  //comentamos por pruebas de autenticacion
   //@UseGuards(AuthGuard())
   @Get()
   getUsers(): Promise<ReadUserDto[]> {
     return this._userService.getAll();
   }
-
-  // @Post()
-  // async createUser(@Body() user: User): Promise<User> {
-  //   const details = new UserDetails();
-  //   user.details = details;
-
-  //   const repo = await getConnection().getRepository(Role);
-
-  //   const defaultRole = await repo.findOne({ where: { nombre: 'GENERAL' } });
-  //   user.roles = [defaultRole];
-  //   const createdUser = await this._userService.create(user);
-  //   return createdUser;
-  // }
 
   @Put(':userId')
   @ApiBody({ type: UpdateUserDto })
@@ -76,3 +58,27 @@ export class UserController {
     return this._userService.setRoleToUser(userId, roleId);
   }
 }
+
+// import { AuthGuard } from '@nestjs/passport';
+// import { getConnection } from 'typeorm';
+// import { Roles } from '../role/decorators/role.decorator';
+// import { RoleGuard } from '../role/guards/role.guard';
+// import { Role } from '../role/role.entity';
+
+// import { UserDTO } from './dto/user.dto';
+// import { UserDetails } from './user.details.entity';
+// import { User } from './user.entity';
+
+///crear usuario
+// @Post()
+// async createUser(@Body() user: User): Promise<User> {
+//   const details = new UserDetails();
+//   user.details = details;
+
+//   const repo = await getConnection().getRepository(Role);
+
+//   const defaultRole = await repo.findOne({ where: { nombre: 'GENERAL' } });
+//   user.roles = [defaultRole];
+//   const createdUser = await this._userService.create(user);
+//   return createdUser;
+// }

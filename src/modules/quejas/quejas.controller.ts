@@ -1,6 +1,7 @@
 import {
   Body,
   Controller,
+  Delete,
   Get,
   Param,
   ParseIntPipe,
@@ -47,6 +48,13 @@ export class QuejasControlle {
     return this._quejasService.getAllQuejasComercio(idComercio);
   }
 
+  @Get('/comercio/nit/:nit')
+  getAllQuejasComercioNit(
+    @Param('nit') nit: string,
+  ): Promise<ReadComercioDto[]> {
+    return this._quejasService.getQuejasByNit(nit);
+  }
+
   @Get('/comercio/municipio/:idMunicipio')
   getAllQuejasMunicipio(
     @Param('idMunicipio', ParseIntPipe) idMunicipio: number,
@@ -75,5 +83,10 @@ export class QuejasControlle {
     @Body() queja: UpdateQuejaDto,
   ): Promise<ReadQuejaDto> {
     return this._quejasService.updateQueja(queja, idQueja);
+  }
+
+  @Delete(':idQueja')
+  deleteQueja(@Param('idQueja', ParseIntPipe) idQueja: number): Promise<any> {
+    return this._quejasService.deleteQuejaById(idQueja);
   }
 }

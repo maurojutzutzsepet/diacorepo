@@ -1,6 +1,7 @@
 import {
   Body,
   Controller,
+  Delete,
   Get,
   Param,
   ParseBoolPipe,
@@ -53,5 +54,12 @@ export class ComercioController {
     @Body() comercio: Partial<UpdateComercioDto>,
   ): Promise<ReadComercioDto> {
     return this._comercioService.updateComercio(idComercio, comercio);
+  }
+
+  @Delete(':idComercio')
+  deleteComercio(
+    @Param('idComercio', ParseIntPipe) idComercio: number,
+  ): Promise<any> {
+    return this._comercioService.deleteComercio(idComercio);
   }
 }

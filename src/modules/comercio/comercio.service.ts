@@ -75,7 +75,6 @@ export class ComercioService {
     foundComercio.departamento = comercio.departamento;
     foundComercio.direccion = comercio.direccion;
     foundComercio.municipio = comercio.municipio;
-    //foundComercio.status = comercio.municipio;
     foundComercio.email = comercio.email;
     foundComercio.region = comercio.region;
 
@@ -84,17 +83,12 @@ export class ComercioService {
     return plainToClass(ReadComercioDto, updatedComercio);
   }
 
-  //   async create(role: Partial<CreateRoleDto>): Promise<ReadRoleDto> {
-  //     const savedRole: Role = await this._roleRepository.save(role);
-  //     return plainToClass(ReadRoleDto, savedRole);
-  //   }
-
   async deleteComercio(idComercio: number): Promise<any> {
     const comercioExist = await this._comercioRepository.findOne(idComercio, {
       where: { status: 'ACTIVE' },
     });
     if (!comercioExist) {
-      throw new NotFoundException();
+      throw new NotFoundException('No existe el comercio con ese id');
     }
     await this._comercioRepository.update(idComercio, { status: 'INACTIVE' });
   }

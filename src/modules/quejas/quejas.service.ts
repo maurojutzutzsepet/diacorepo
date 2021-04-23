@@ -100,6 +100,16 @@ export class QuejaService {
     return plainToClass(ReadComercioDto, comercio);
   }
 
+  async getQuejasByNit(nit: string) {
+    const comercios = await this._comercioRepository.find({
+      where: { status: 'ACTIVE', nit: nit },
+      relations: ['quejas'],
+    });
+    return comercios.map((comercio: Comercio) =>
+      plainToClass(ReadComercioDto, comercio),
+    );
+  }
+
   async getAllQuejasMunicipio(idMunicipio: number) {
     const comercios = await this._comercioRepository.find({
       where: { status: 'ACTIVE', municipio: idMunicipio },
@@ -128,5 +138,17 @@ export class QuejaService {
     return comercios.map((comercio: Comercio) =>
       plainToClass(ReadComercioDto, comercio),
     );
+  }
+
+  async deleteQuejaById(idQueja: number): Promise<any> {
+    const queja = await this._quejaRepository.findOne(idQueja, {
+      where: { status: 'ACTIVE' },
+    });
+
+    if (!queja) {
+      throw new NotFoundException('No existe esta queja');
+    }
+
+    await this._quejaRepository.update(idQueja, { status: 'INACTIVE' });
   }
 }
